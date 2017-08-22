@@ -165,4 +165,20 @@ public class UniversalDatabaseConnector {
     public String getIdentifier() {
         return username + "@" + host + ":" + port + "/" + database;
     }
+
+    /**
+     * Get the database type identifier by the database type name.
+     * @param name Database Type name, e.g. MySQL
+     * @return Database Type identifier.
+     */
+    public int databaseTypeByName(String name) {
+        if (name.equalsIgnoreCase("mysql")) {
+            return DBT_MYSQL;
+        }
+        else if (name.equalsIgnoreCase("oracle")) {
+            return DBT_ORACLE;
+        }
+
+        return -1;
+    }
 }

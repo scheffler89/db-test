@@ -23,4 +23,16 @@ class UniversalDatabaseConnectorTest {
         assertEquals("root@localhost:3306/information_schema", target.getIdentifier());
     }
 
+    @Test
+    public void shouldDetermineMySql() {
+        UniversalDatabaseConnector connector = new UniversalDatabaseConnector();
+        assertEquals(UniversalDatabaseConnector.DBT_MYSQL, connector.databaseTypeByName("mysql"));
+    }
+
+    @Test
+    public void shouldDetermineMyOracle() {
+        UniversalDatabaseConnector connector = new UniversalDatabaseConnector();
+        assertEquals(UniversalDatabaseConnector.DBT_ORACLE, connector.databaseTypeByName("oracle"));
+    }
+
 }

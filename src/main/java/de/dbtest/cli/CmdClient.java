@@ -9,6 +9,7 @@ import org.apache.commons.cli.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -53,6 +54,10 @@ public class CmdClient {
             String testSetIdentifier = commandLine.getOptionValue("set");
             LOGGER.info("Get status of Test Case Set {}", testSetIdentifier);
             cmdStatusSet(testSetIdentifier, projectRootDirectory);
+        }
+        else if (commandLine.hasOption("addtarget")) {
+            LOGGER.info("Add a new target.");
+            cmdAddTarget();
         }
         else {
             LOGGER.info("No valid parameter combination.");
@@ -190,6 +195,39 @@ public class CmdClient {
 
 
         return "UNKNOWN";
+
+    }
+
+    private static void cmdAddTarget() {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Database Type:");
+        String databaseType = scanner.next();
+
+        System.out.print("Host:");
+        String host = scanner.next();
+
+        System.out.print("Port:");
+        int port = scanner.nextInt();
+
+        System.out.print("Database / Schema:");
+        String database = scanner.next();
+
+        System.out.print("Username:");
+        String username = scanner.next();
+
+        System.out.print("Password:");
+        String password = scanner.next();
+
+        System.out.println();
+
+        System.out.print("Would you like to add the Target? (yes)");
+        String userConfirmation = scanner.next();
+
+        if (userConfirmation.equalsIgnoreCase("yes") || userConfirmation.isEmpty()) {
+            UniversalDatabaseConnector connector = new UniversalDatabaseConnector();
+        }
 
     }
 }
